@@ -1,5 +1,5 @@
 import React, { Component }  from 'react';
-import { AppRegistry, ListView, StyleSheet, Text, View, TouchableHighlight, AlertIOS } from 'react-native';
+import { AppRegistry, ListView, StyleSheet, Text, View, TouchableHighlight, AlertIOS, SafeAreaView } from 'react-native';
 import * as firebase from 'firebase';
 import ActionButton from './components/ActionButton';
 import ListItem from './components/ListItem';
@@ -57,19 +57,21 @@ export default class App extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+                <View style={styles.container}>
 
-                <StatusBar title="Grocery List" />
+                    <StatusBar title="Grocery List" />
 
-                <ListView
-                    dataSource={this.state.dataSource}
-                    renderRow={this._renderItem.bind(this)}
-                    enableEmptySections={true}
-                    style={styles.listview} />
+                    <ListView
+                        dataSource={this.state.dataSource}
+                        renderRow={this._renderItem.bind(this)}
+                        enableEmptySections={true}
+                        style={styles.listview} />
 
-                <ActionButton onPress={this._addItem.bind(this)} title="Add" />
+                    <ActionButton onPress={this._addItem.bind(this)} title="Add" />
 
-            </View>
+                </View>
+            </SafeAreaView>
         )
     }
 
