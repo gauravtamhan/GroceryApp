@@ -1,7 +1,8 @@
-import React, { Component }  from 'react';
+import React, { Component } from 'react';
 import { AppRegistry, ListView, StyleSheet, Text, View, TouchableHighlight, AlertIOS, SafeAreaView } from 'react-native';
 import * as firebase from 'firebase';
 import ActionButton from './components/ActionButton';
+import InfoButton from './components/InfoButton';
 import ListItem from './components/ListItem';
 import StatusBar from './components/StatusBar';
 import styles from './styles.js';
@@ -68,11 +69,16 @@ export default class App extends Component {
                         enableEmptySections={true}
                         style={styles.listview} />
 
+                    <InfoButton onPress={this._infoPress.bind(this)} title="Info" />
                     <ActionButton onPress={this._addItem.bind(this)} title="Add" />
 
                 </View>
             </SafeAreaView>
         )
+    }
+
+    _infoPress() {
+        AlertIOS.alert("Info", "This is a sample Grocery App");
     }
 
     _addItem() {

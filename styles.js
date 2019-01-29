@@ -63,6 +63,14 @@ var styles = StyleSheet.create({
         paddingTop: 14,
         paddingBottom: 16,
     },
+    info: {
+        backgroundColor: '#4885ed',
+        borderColor: 'transparent',
+        borderWidth: 1,
+        paddingLeft: 16,
+        paddingTop: 14,
+        paddingBottom: 16,
+    },
 })
 
 export default styles;
