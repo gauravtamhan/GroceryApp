@@ -30,9 +30,10 @@ var styles = StyleSheet.create({
         borderBottomColor: '#eee',
         borderColor: 'transparent',
         borderWidth: 1,
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         height: 44,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        // backgroundColor: '#ff0000',
     },
     navbarTitle: {
         color: '#444',
