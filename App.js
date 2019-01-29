@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, ListView, StyleSheet, Text, View, TouchableHighlight, AlertIOS, SafeAreaView } from 'react-native';
+import { ListView, View, AlertIOS, SafeAreaView } from 'react-native';
 import * as firebase from 'firebase';
 import ActionButton from './components/ActionButton';
 import InfoButton from './components/InfoButton';
@@ -56,32 +56,11 @@ export default class App extends Component {
         this.listenForItems(this.itemsRef);
     }
 
-    render() {
-        return (
-            <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
-                <View style={styles.container}>
-
-                    <StatusBar title="Grocery List" />
-
-                    <ListView
-                        dataSource={this.state.dataSource}
-                        renderRow={this._renderItem.bind(this)}
-                        enableEmptySections={true}
-                        style={styles.listview} />
-
-                    <InfoButton onPress={this._infoPress.bind(this)} title="Info" />
-                    <ActionButton onPress={this._addItem.bind(this)} title="Add" />
-
-                </View>
-            </SafeAreaView>
-        )
+    infoPress = () => {
+        AlertIOS.alert("Info", "This is a sample Grocery App.");
     }
 
-    _infoPress() {
-        AlertIOS.alert("Info", "This is a sample Grocery App");
-    }
-
-    _addItem() {
+    addItem = () => {
         AlertIOS.prompt(
             'Add New Item',
             null,
@@ -99,7 +78,6 @@ export default class App extends Component {
     }
 
     _renderItem(item) {
-
         const onPress = () => {
             AlertIOS.alert(
                 'Complete',
@@ -114,5 +92,22 @@ export default class App extends Component {
         return (
             <ListItem item={item} onPress={onPress} />
         );
+    }
+
+    render() {
+        return (
+            <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+                <View style={styles.container}>
+                    <StatusBar title="Grocery List" />
+                    <ListView
+                        dataSource={this.state.dataSource}
+                        renderRow={this._renderItem.bind(this)}
+                        enableEmptySections={true}
+                        style={styles.listview} />
+                    <InfoButton onPress={this.infoPress} title="Info" />
+                    <ActionButton onPress={this.addItem} title="Add" />
+                </View>
+            </SafeAreaView>
+        )
     }
 }

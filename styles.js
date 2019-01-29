@@ -1,9 +1,5 @@
 import { StyleSheet } from 'react-native';
 
-// const constants = {
-//     actionColor: '#24CE84'
-// };
-
 var styles = StyleSheet.create({
     container: {
         backgroundColor: '#f2f2f2',
@@ -41,7 +37,7 @@ var styles = StyleSheet.create({
     navbarTitle: {
         color: '#444',
         fontSize: 16,
-        fontWeight: "500"
+        fontWeight: "700"
     },
     statusbar: {
         backgroundColor: '#fff',
@@ -54,22 +50,11 @@ var styles = StyleSheet.create({
         color: '#fff',
         fontSize: 16,
         textAlign: 'center',
+        fontWeight: '500',
     },
-    action: {
-        backgroundColor: '#24CE84',
-        borderColor: 'transparent',
-        borderWidth: 1,
-        paddingLeft: 16,
-        paddingTop: 14,
-        paddingBottom: 16,
-    },
-    info: {
-        backgroundColor: '#4885ed',
-        borderColor: 'transparent',
-        borderWidth: 1,
-        paddingLeft: 16,
-        paddingTop: 14,
-        paddingBottom: 16,
+    button: {
+        paddingVertical: 16,
+        backgroundColor: '#DDD'
     },
 })
 
