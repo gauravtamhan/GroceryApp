@@ -1,35 +1,29 @@
 import React, { Component } from 'react';
 import { ListView, View, AlertIOS, SafeAreaView } from 'react-native';
-import { auth, database, provider } from '../firebase.js';
+import { auth, database, provider } from '../firebase';
 import ActionButton from '../components/ActionButton';
-import InfoButton from '../components/InfoButton';
 import ListItem from '../components/ListItem';
 import StatusBar from '../components/StatusBar';
-import styles from '../styles.js';
+import styles from '../assets/styles';
 
 export default class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentUser: null,
+            currentUser: auth.currentUser,
             dataSource: new ListView.DataSource({
                 rowHasChanged: (row1, row2) => row1 !== row2,
             })
         };
-        this.itemsRef = this.getRef().child('items');
-    }
-
-    getRef() {
-        return database.ref();
+        // this.itemsRef = database.ref().child('users/' + this.state.currentUser.uid + '/items');
     }
 
     componentDidMount() {
-        this.setState({ currentUser: auth.currentUser });
-        this.listenForItems(this.itemsRef);
+        this.listenForItems();
     }
 
-    listenForItems(itemsRef) {
-        itemsRef.on('value', (snap) => {
+    listenForItems() {
+        database.ref().child('users/' + this.state.currentUser.uid + '/items').on('value', (snap) => {
 
             // get children as an array
             var items = [];
@@ -47,11 +41,8 @@ export default class Home extends Component {
         });
     }
 
-    infoPress = () => {
-        AlertIOS.alert(null, "This is a sample grocery app.");
-    }
-
     addItem = () => {
+        const itemsRef = database.ref().child('users/' + this.state.currentUser.uid + '/items');
         AlertIOS.prompt(
             'Add New Item',
             null,
@@ -60,7 +51,7 @@ export default class Home extends Component {
                 {
                     text: 'Add',
                     onPress: (text) => {
-                        this.itemsRef.push({ title: text })
+                        itemsRef.push({ title: text })
                     }
                 },
             ],
@@ -70,6 +61,7 @@ export default class Home extends Component {
 
     _renderItem(item) {
         const onPress = () => {
+            const itemsRef = database.ref().child('users/' + this.state.currentUser.uid + '/items');
             AlertIOS.alert(
                 'Complete',
                 `This will remove "${item.title}" from your list.`,
@@ -81,7 +73,7 @@ export default class Home extends Component {
                     },
                     { 
                         text: 'Complete', 
-                        onPress: (text) => this.itemsRef.child(item._key).remove(),
+                        onPress: (text) => itemsRef.child(item._key).remove(),
                     },
                 ]
             );
@@ -133,7 +125,6 @@ export default class Home extends Component {
                         renderRow={this._renderItem.bind(this)}
                         enableEmptySections={true}
                         style={styles.listview} />
-                    <InfoButton onPress={this.infoPress} title="Info" />
                     <ActionButton onPress={this.addItem} title="Add" />
                 </View>
             </SafeAreaView>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, TouchableHighlight, View, TextInput, StyleSheet, ScrollView, ActivityIndicator, Text, SafeAreaView } from 'react-native';
-import { auth, database, provider } from '../firebase.js';
+import { auth, database, provider } from '../firebase';
 
 export default class Auth extends Component {
     
@@ -79,33 +79,41 @@ export default class Auth extends Component {
                         }
                         </View>
 
-                    <TextInput
-                        value={this.state.username}
-                        autoCapitalize={'none'}
-                        clearButtonMode={'while-editing'}
-                        autoCorrect={false}
-                        onChangeText={(username) => this.setState({ username })}
-                        placeholder={'E-mail'}
-                            style={[stylesSheet.input, { marginTop: 20 }]}
-                    />
-                    <TextInput
-                        value={this.state.password}
-                        autoCapitalize={'none'}
-                        clearButtonMode={'while-editing'}
-                        autoCorrect={false}
-                        onChangeText={(password) => this.setState({ password })}
-                        placeholder={'Password'}
-                        secureTextEntry={true}
-                            style={stylesSheet.input}
-                    />
+                        <TextInput
+                            value={this.state.username}
+                            autoCapitalize={'none'}
+                            clearButtonMode={'while-editing'}
+                            autoCorrect={false}
+                            onChangeText={(username) => this.setState({ username })}
+                            placeholder={'E-mail'}
+                                style={[stylesSheet.input, { marginTop: 20 }]}
+                        />
+                        <TextInput
+                            value={this.state.password}
+                            autoCapitalize={'none'}
+                            clearButtonMode={'while-editing'}
+                            autoCorrect={false}
+                            onChangeText={(password) => this.setState({ password })}
+                            placeholder={'Password'}
+                            secureTextEntry={true}
+                                style={stylesSheet.input}
+                        />
 
-                    <TouchableHighlight
-                        style={stylesSheet.loginBtn}
-                        underlayColor={'#17C177'}
-                        onPress={this.onLogin.bind(this)}>
-                        <Text style={stylesSheet.buttonText}>Login</Text>
-                    </TouchableHighlight>
-                    
+                        <TouchableHighlight
+                            style={stylesSheet.loginBtn}
+                            underlayColor={'#17C177'}
+                            onPress={this.onLogin.bind(this)}>
+                            <Text style={stylesSheet.buttonText}>Login</Text>
+                        </TouchableHighlight>
+                        
+                        <TouchableHighlight
+                            style={stylesSheet.loginBtn}
+                            underlayColor={'#17C177'}
+                            onPress={() => {
+                                this.props.navigation.navigate('Signup')
+                            }}>
+                            <Text style={stylesSheet.buttonText}>Sign Up</Text>
+                        </TouchableHighlight>
                     </View>
                 </ScrollView>
             </SafeAreaView>

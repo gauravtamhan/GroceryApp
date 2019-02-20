@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import { SafeAreaView } from 'react-native';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation'
-import Auth from './views/Auth';
-import Home from './views/Home';
-import Loading from './views/Loading';
+import Auth from './src/screens/Auth';
+import Home from './src/screens/Home';
+import Loading from './src/screens/Loading';
+import Signup from './src/screens/Signup';
 
 const Navigator = createAppContainer(createSwitchNavigator(
     {
         Loading,
         Auth,
+        Signup,
         Home
     },
     {
@@ -17,7 +18,7 @@ const Navigator = createAppContainer(createSwitchNavigator(
 ))
 
 export default class App extends Component {
-    
+
     render() {
         return (
             <Navigator />

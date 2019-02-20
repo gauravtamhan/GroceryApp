@@ -1,15 +1,13 @@
-'use strict';
-
 import React, { Component } from 'react';
 import { Text, TouchableHighlight } from 'react-native';
-import styles from '../styles.js';
+import styles from '../assets/styles';
 
-export default class InfoButton extends Component {
+export default class ActionButton extends Component {
     render() {
         return (
             <TouchableHighlight
-                style={[styles.button, { backgroundColor: '#4885ED'}]}
-                underlayColor={'#3B78E0'}
+                style={[styles.button, { backgroundColor: '#24CE84'}]}
+                underlayColor={'#17C177'}
                 onPress={this.props.onPress}>
                 <Text style={styles.actionText}>{this.props.title}</Text>
             </TouchableHighlight>
